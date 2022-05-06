@@ -1,0 +1,6 @@
+
+testCreateDevelopmentInvalidDataException=true
+testUpdateDevelopmentInvalidDataException=true
+testRegisterPoliticalLeaderInvalidDataException=true
+testDeleteLeaderWhenPartyRegisteredNotPresent=true
+testRegisterPoliticalPartyInvalidDataException=true
