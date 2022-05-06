@@ -14,13 +14,10 @@ public class PartyDto {
 	@NotNull
 	@Length(min = 5, max = 100)
 	private String founderName;
-	
-	
 	@NotNull
 	@Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="yyyy")
+	@JsonFormat(pattern="yyyy")
 	private Long foundationYear;
-	
 
 	public Long getPoliticalPartyId() {
 		return politicalPartyId;
@@ -60,5 +57,5 @@ public class PartyDto {
 				+ founderName + ", foundationYear=" + foundationYear + "]";
 	}
 
-	
+
 }
