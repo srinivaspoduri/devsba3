@@ -1,8 +1,6 @@
 package in.political.party.controller;
 
 import javax.validation.Valid;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -41,13 +39,6 @@ public class DevelopmentController {
 
 
 	}
-//	@GetMapping("get-development-by/{leaderId}")
-//	public ResponseEntity<List<DevelopmentDto>> getAllDevelopmentsByPoliticalLeaderId(@PathVariable Long leaderId) {
-//
-//		List<DevelopmentDto> allDevelopmentsByLeaderId = developmentService
-//				.getAllDevelopmentsByLeaderId(leaderId);
-//		return ResponseEntity.ok(allDevelopmentsByLeaderId);
-//	}
 	@PutMapping("/update-development")
 	public ResponseEntity<DevelopmentDto> updateDevelopments(@Valid @RequestBody DevelopmentDto developmentDto,
 			BindingResult result) {
@@ -55,8 +46,6 @@ public class DevelopmentController {
 			throw new InvalidDataException("Invalid data Recived to update the development");
 		}
 		DevelopmentDto updateDevelopment = developmentService.updateDevelopment(developmentDto);
-		System.out.println("update con"+updateDevelopment);
-		System.out.println("update con"+developmentDto);
 		if(updateDevelopment!=null)
 		{
 			return ResponseEntity.ok(updateDevelopment);
@@ -76,7 +65,7 @@ public class DevelopmentController {
 		{
 			throw new LeaderIdNotFoundException("Leader not present to get development details");
 		}
-		if(devByLeader.getDevelopmentDtos().size()!=0)
+		if(!devByLeader.getDevelopmentDtos().isEmpty())
 		{
 			return ResponseEntity.ok(devByLeader);
 		}

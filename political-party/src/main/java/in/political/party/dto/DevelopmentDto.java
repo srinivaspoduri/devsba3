@@ -1,14 +1,9 @@
 package in.political.party.dto;
-
-
-
 import javax.persistence.Column;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
-
 public class DevelopmentDto {
 
 	@NotNull
