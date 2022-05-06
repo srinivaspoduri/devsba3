@@ -18,8 +18,7 @@ public class Party {
 	
 	@NotNull
 	private Long foundationYear;
-	
-	
+		
 	public Long getFoundationYear() {
 		return foundationYear;
 	}

@@ -28,9 +28,7 @@ public class Development {
 	private Integer activityMonth;
 	@NotNull
 	private Integer activityYear;
-	
 	//many developments linked to one leader. the FK is politicalLeaderId
-
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="politicalLeaderId" ,insertable= false,updatable=false)
 	private Leader politicalLeader;
@@ -100,12 +98,12 @@ public class Development {
 	}
 
 	public Leader getPoliticalLeader() {
-		
+
 		return politicalLeader;
 	}
 
 	public void setPoliticalLeader(Leader politicalLeader) {
-	this.politicalLeader = politicalLeader;
+		this.politicalLeader = politicalLeader;
 	}
 
 	@Override
@@ -114,10 +112,5 @@ public class Development {
 				+ ", budget=" + budget + ", state=" + state + ", activityMonth=" + activityMonth + ", activityYear="
 				+ activityYear + ", politicalLeader=" + politicalLeader + "]";
 	}
-
-
-
-	
-
 
 }
