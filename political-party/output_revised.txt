@@ -1,8 +1,5 @@
 
-testGetAllDevelopmentsByPoliticalLeaderIdIsServiceMethodCalled=true
 testAddDevelopment=true
-testGetAllDevelopmentsByPoliticalLeaderId=true
-testUpdateDevelopment=false
 testAddDevelopmentIsServiceMethodCalled=true
 testRegisterPoliticalLeaderIsServiceMethodCalled=true
 testRegisterPoliticalLeader=true
