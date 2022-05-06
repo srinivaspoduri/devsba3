@@ -2,7 +2,6 @@ package in.political.party.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,10 +46,13 @@ public class PartyController {
 		{
 			boolean deleteLeader = partyService.deleteLeader(leaderId);
 			if(deleteLeader)
-			return ResponseEntity.ok("Leader Deleted Successfully");
+			{
+				return ResponseEntity.ok("Leader Deleted Successfully");
+			}
 			else
-
+			{
 				throw new LeaderIdNotFoundException(" leader Code Does not Exists.." + leaderId);
+			}
 		}
 		else
 			throw new PartyNotFoundException("Party not present to delete the leader "+leaderId);

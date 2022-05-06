@@ -4,7 +4,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import in.political.party.dto.DevelopmentDto;
 import in.political.party.dto.LeaderDevelopmentDto;
+import in.political.party.exceptions.DevelopmentNotFoundException;
 import in.political.party.exceptions.InvalidDataException;
+import in.political.party.exceptions.LeaderIdNotFoundException;
 import in.political.party.service.DevelopmentService;
 
 
@@ -31,22 +32,22 @@ public class DevelopmentController {
 	@PostMapping("/add-development")
 	public ResponseEntity<DevelopmentDto> addDevelopments(@Valid @RequestBody DevelopmentDto developmentDto, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
-         {
-           
-           throw new InvalidDataException("Invalid data Recived to register new Leader");
-       }
+		{
+
+			throw new InvalidDataException("Invalid data Recived to register new Leader");
+		}
 		DevelopmentDto createDevelopment = developmentService.createDevelopment(developmentDto);
 		return ResponseEntity.ok(createDevelopment);
-		
-		
-	}
-	@GetMapping("get-development-by/{leaderId}")
-	public ResponseEntity<List<DevelopmentDto>> getAllDevelopmentsByPoliticalLeaderId(@PathVariable Long leaderId) {
 
-		List<DevelopmentDto> allDevelopmentsByLeaderId = developmentService
-				.getAllDevelopmentsByLeaderId(leaderId);
-		return ResponseEntity.ok(allDevelopmentsByLeaderId);
+
 	}
+//	@GetMapping("get-development-by/{leaderId}")
+//	public ResponseEntity<List<DevelopmentDto>> getAllDevelopmentsByPoliticalLeaderId(@PathVariable Long leaderId) {
+//
+//		List<DevelopmentDto> allDevelopmentsByLeaderId = developmentService
+//				.getAllDevelopmentsByLeaderId(leaderId);
+//		return ResponseEntity.ok(allDevelopmentsByLeaderId);
+//	}
 	@PutMapping("/update-development")
 	public ResponseEntity<DevelopmentDto> updateDevelopments(@Valid @RequestBody DevelopmentDto developmentDto,
 			BindingResult result) {
@@ -54,15 +55,37 @@ public class DevelopmentController {
 			throw new InvalidDataException("Invalid data Recived to update the development");
 		}
 		DevelopmentDto updateDevelopment = developmentService.updateDevelopment(developmentDto);
-		return ResponseEntity.ok(updateDevelopment);
+		System.out.println("update con"+updateDevelopment);
+		System.out.println("update con"+developmentDto);
+		if(updateDevelopment!=null)
+		{
+			return ResponseEntity.ok(updateDevelopment);
+		}
+		else
+		{
+			throw new DevelopmentNotFoundException("No Developments found /Leader not present");
+		}
+
 	}
-	
-	@GetMapping("getdev/{leaderId}")
+
+	@GetMapping("get-development-by/{leaderId}")
 	public ResponseEntity<LeaderDevelopmentDto> getAllDevByLeader(@PathVariable Long leaderId) {
 
 		LeaderDevelopmentDto devByLeader = developmentService.getDevByLeader(leaderId);
-		return ResponseEntity.ok(devByLeader);
+		if(devByLeader.getLeader().getPoliticalLeaderId()==null)
+		{
+			throw new LeaderIdNotFoundException("Leader not present to get development details");
+		}
+		if(devByLeader.getDevelopmentDtos().size()!=0)
+		{
+			return ResponseEntity.ok(devByLeader);
+		}
+		else
+		{
+			throw new DevelopmentNotFoundException("No Developments found /Leader not present");
+		}
+
 
 	}
-	
+
 }

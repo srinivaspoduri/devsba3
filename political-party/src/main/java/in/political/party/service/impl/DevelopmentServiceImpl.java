@@ -31,8 +31,6 @@ public class DevelopmentServiceImpl implements DevelopmentService {
 	@Autowired
 	private LeaderRepository leaderRepository;
 
-
-
 	@Autowired
 	private ModelMapper modelMapper;
 
@@ -41,15 +39,18 @@ public class DevelopmentServiceImpl implements DevelopmentService {
 	@Transactional
 	public DevelopmentDto createDevelopment(DevelopmentDto developmentDto) {
 		Development development = convertToEntity(developmentDto);
-		developmentRepository.save(development);
-		return developmentDto;
+		Development createdDevelopment = developmentRepository.save(development);
+		createdDevelopment.setDevelopmentId(developmentDto.getDevelopmentId());
+		return convertToDto(createdDevelopment);
 	}
 
 	@Override
 	public DevelopmentDto updateDevelopment(DevelopmentDto developmentDto) {
 		Development development = convertToEntity(developmentDto);
-		developmentRepository.save(development);
-		return developmentDto;
+		Development savedDevelopment = developmentRepository.save(development);
+		Leader leader =development.getPoliticalLeader();
+		savedDevelopment.setPoliticalLeader(leader);
+		return convertToDto(savedDevelopment);
 	}
 
 

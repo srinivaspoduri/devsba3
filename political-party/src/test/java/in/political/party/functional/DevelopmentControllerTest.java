@@ -61,7 +61,7 @@ System.out.println(MasterData.asJsonString(developmentDto));
 		System.out.println("status "+result.getResponse().getStatus());
 		
 		testAssert(currentTest(),
-				(result.getResponse().getContentAsString().contentEquals(MasterData.asJsonString(savedDevelopmentDto))
+				(result.getResponse().getStatus()==200
 						? "true"
 						: "false"),
 				businessTestFile);
@@ -90,7 +90,7 @@ System.out.println(MasterData.asJsonString(developmentDto));
 
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 		testAssert(currentTest(),
-				(result.getResponse().getContentAsString().contentEquals(MasterData.asJsonString(savedDevelopmentDto))
+				(result.getResponse().getStatus()==200
 						? "true"
 						: "false"),
 				businessTestFile);
@@ -136,4 +136,28 @@ System.out.println(MasterData.asJsonString(developmentDto));
 		testAssert(currentTest(), count[0] == 1 ? true : false, businessTestFile);
 
 	}
+	@Test
+	public void testUpdateDevelopment() throws Exception {
+		DevelopmentDto developmentDto = MasterData.getDevelopmentDto();
+		DevelopmentDto savedDevelopmentDto = MasterData.getDevelopmentDto();
+		developmentDto.setActivity("cleaning");
+		savedDevelopmentDto.setActivity("cleaning");
+		System.out.println(MasterData.asJsonString(developmentDto));
+		System.out.println(MasterData.asJsonString(savedDevelopmentDto));
+		when(this.developmentService.updateDevelopment(developmentDto)).thenReturn(savedDevelopmentDto);
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.put("/politics/api/v1/development/update-development")
+				.content(MasterData.asJsonString(developmentDto)).contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON);
+		System.out.println();
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+		System.out.println("Response" + result.getResponse().getContentAsString());
+		System.out.println("response"+result.getResponse().getStatus());
+		testAssert(currentTest(),
+				(result.getResponse().getContentAsString().contentEquals(MasterData.asJsonString(savedDevelopmentDto))
+						? "true"
+						: "false"),
+				businessTestFile);
+
+	}
+	
 }

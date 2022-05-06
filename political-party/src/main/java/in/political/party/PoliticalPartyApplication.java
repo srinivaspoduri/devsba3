@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PoliticalPartyApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PoliticalPartyApplication.class, args);
+		SpringApplication.run(PoliticalPartyApplication.class);
 	}
 
 }
