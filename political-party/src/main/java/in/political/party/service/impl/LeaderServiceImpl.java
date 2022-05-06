@@ -6,11 +6,12 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import in.political.party.Repository.LeaderRepository;
-import in.political.party.Repository.PartyRepository;
+
 import in.political.party.dto.LeaderDto;
 import in.political.party.entity.Leader;
 import in.political.party.entity.Party;
+import in.political.party.repository.LeaderRepository;
+import in.political.party.repository.PartyRepository;
 import in.political.party.service.LeaderService;
 
 

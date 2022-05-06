@@ -1,6 +1,6 @@
 package in.political.party.dto;
 
-import java.util.Objects;
+
 
 import javax.persistence.Column;
 import javax.validation.constraints.DecimalMin;
@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
 public class DevelopmentDto {
-	
+
 	@NotNull
 	private Long developmentId;
 	@NotNull
@@ -23,8 +23,8 @@ public class DevelopmentDto {
 	private String activity;
 	@NotNull
 	@DecimalMin(value = "0.00", inclusive = false)
-    //@Digits(integer=3, fraction=2)
-	 @Column(precision=10, scale=2)
+	//@Digits(integer=3, fraction=2)
+	@Column(precision=10, scale=2)
 	private String budget;
 	@NotNull
 	@Length(min = 3, max = 50)
@@ -33,7 +33,7 @@ public class DevelopmentDto {
 	@Range(min = 1, max = 12)
 	private Integer activityMonth;
 	@NotNull
-@Range(min = 2020, max = 2040)
+	@Range(min = 2020, max = 2040)
 	private Integer activityYear;
 
 	public Long getDevelopmentId() {
@@ -100,33 +100,11 @@ public class DevelopmentDto {
 		this.activityYear = activityYear;
 	}
 
-	
-
 	@Override
 	public String toString() {
 		return "DevelopmentDto [developmentId=" + developmentId + ", politicalLeaderId=" + politicalLeaderId
 				+ ", title=" + title + ", activity=" + activity + ", budget=" + budget + ", state=" + state
 				+ ", activityMonth=" + activityMonth + ", activityYear=" + activityYear + "]";
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(activity, activityMonth, activityYear, budget, politicalLeaderId, developmentId, state, title);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		DevelopmentDto other = (DevelopmentDto) obj;
-		return Objects.equals(activity, other.activity) && Objects.equals(activityMonth, other.activityMonth)
-				&& Objects.equals(activityYear, other.activityYear) && Objects.equals(budget, other.budget)
-				&& Objects.equals(politicalLeaderId, other.politicalLeaderId) && Objects.equals(developmentId, other.developmentId)
-				&& Objects.equals(state, other.state) && Objects.equals(title, other.title);
 	}
 
 }

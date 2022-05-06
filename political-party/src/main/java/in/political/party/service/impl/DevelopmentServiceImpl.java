@@ -9,14 +9,15 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import in.political.party.Repository.DevelopmentRepository;
-import in.political.party.Repository.LeaderRepository;
+
 import in.political.party.dto.DevelopmentDto;
 import in.political.party.dto.LeaderDevelopmentDto;
 import in.political.party.dto.LeaderDto;
 import in.political.party.entity.Development;
 import in.political.party.entity.Leader;
 import in.political.party.entity.Party;
+import in.political.party.repository.DevelopmentRepository;
+import in.political.party.repository.LeaderRepository;
 import in.political.party.service.DevelopmentService;
 
 

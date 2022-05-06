@@ -13,21 +13,14 @@ import javax.validation.constraints.NotNull;
 public class Leader {
 	
 	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long politicalLeaderId;
-//	@NotNull
-//	private Long politicalPartyId;
 	@NotNull
 	private String candidateName;
 	@NotNull
 	private String candidateState;
 	
-	//one politicalleader may have many developments
 	@OneToMany(mappedBy="politicalLeader")
 	private List<Development> development;
-	
-	
-	//many leaders related to single party.
 	
 	@NotNull
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -46,12 +39,7 @@ public class Leader {
 	public void setPoliticalLeaderId(Long politicalLeaderId) {
 		this.politicalLeaderId = politicalLeaderId;
 	}
-//	public Long getPoliticalPartyId() {
-//		return politicalPartyId;
-//	}
-//	public void setPoliticalPartyId(Long politicalPartyId) {
-//		this.politicalPartyId = politicalPartyId;
-//	}
+
 	public String getCandidateName() {
 		return candidateName;
 	}

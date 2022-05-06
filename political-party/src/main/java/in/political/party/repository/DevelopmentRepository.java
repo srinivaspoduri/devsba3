@@ -1,4 +1,4 @@
-package in.political.party.Repository;
+package in.political.party.repository;
 
 import java.util.List;
 

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +36,7 @@ public class DevelopmentController {
            throw new InvalidDataException("Invalid data Recived to register new Leader");
        }
 		DevelopmentDto createDevelopment = developmentService.createDevelopment(developmentDto);
-		return new ResponseEntity<DevelopmentDto>(createDevelopment, HttpStatus.OK);
+		return ResponseEntity.ok(createDevelopment);
 		
 		
 	}
@@ -46,8 +45,7 @@ public class DevelopmentController {
 
 		List<DevelopmentDto> allDevelopmentsByLeaderId = developmentService
 				.getAllDevelopmentsByLeaderId(leaderId);
-		return new ResponseEntity<List<DevelopmentDto>>(allDevelopmentsByLeaderId, HttpStatus.OK);
-
+		return ResponseEntity.ok(allDevelopmentsByLeaderId);
 	}
 	@PutMapping("/update-development")
 	public ResponseEntity<DevelopmentDto> updateDevelopments(@Valid @RequestBody DevelopmentDto developmentDto,
@@ -56,15 +54,14 @@ public class DevelopmentController {
 			throw new InvalidDataException("Invalid data Recived to update the development");
 		}
 		DevelopmentDto updateDevelopment = developmentService.updateDevelopment(developmentDto);
-		return new ResponseEntity<DevelopmentDto>(updateDevelopment, HttpStatus.OK);
-
+		return ResponseEntity.ok(updateDevelopment);
 	}
 	
 	@GetMapping("getdev/{leaderId}")
 	public ResponseEntity<LeaderDevelopmentDto> getAllDevByLeader(@PathVariable Long leaderId) {
 
 		LeaderDevelopmentDto devByLeader = developmentService.getDevByLeader(leaderId);
-		return new ResponseEntity<LeaderDevelopmentDto>(devByLeader, HttpStatus.OK);
+		return ResponseEntity.ok(devByLeader);
 
 	}
 	

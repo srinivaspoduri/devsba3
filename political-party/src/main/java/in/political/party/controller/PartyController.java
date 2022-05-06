@@ -35,7 +35,7 @@ public class PartyController {
 			throw new InvalidDataException("Invalid data Recived to register new Party");
 		}
 		PartyDto registerParty = partyService.registerParty(politicalPartyDto);
-		return new ResponseEntity<PartyDto>(registerParty, HttpStatus.OK);
+		return ResponseEntity.ok(registerParty);
 
 	}
 
@@ -47,7 +47,7 @@ public class PartyController {
 		{
 			boolean deleteLeader = partyService.deleteLeader(leaderId);
 			if(deleteLeader)
-				return new ResponseEntity<String>("Leader Deleted Successfully", HttpStatus.OK);
+			return ResponseEntity.ok("Leader Deleted Successfully");
 			else
 
 				throw new LeaderIdNotFoundException(" leader Code Does not Exists.." + leaderId);

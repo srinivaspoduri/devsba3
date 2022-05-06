@@ -101,13 +101,11 @@ public class Development {
 
 	public Leader getPoliticalLeader() {
 		
-		System.out.println("Development getter political leader -" +politicalLeader );
 		return politicalLeader;
 	}
 
 	public void setPoliticalLeader(Leader politicalLeader) {
-		System.out.println("Development setter political leader -" +politicalLeader );
-		this.politicalLeader = politicalLeader;
+	this.politicalLeader = politicalLeader;
 	}
 
 	@Override

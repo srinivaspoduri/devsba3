@@ -34,7 +34,8 @@ public class LeaderController {
        }
 		LeaderDto registerPoliticalLeader = leaderService.registerPoliticalLeader(politicalLeaderDto);
 		if(registerPoliticalLeader!=null)
-			return new ResponseEntity<LeaderDto>(registerPoliticalLeader, HttpStatus.OK);
+			
+		return ResponseEntity.ok(registerPoliticalLeader);
 		
 		else
 			throw new PartyNotFoundException("Party with ID "+politicalLeaderDto.getPoliticalPartyId() +" not found to register the leader "+politicalLeaderDto.getPoliticalLeaderId());

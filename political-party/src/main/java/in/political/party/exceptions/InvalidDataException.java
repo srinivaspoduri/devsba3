@@ -1,5 +1,6 @@
 package in.political.party.exceptions;
 
+@SuppressWarnings("serial")
 public class InvalidDataException extends RuntimeException {
 	
 	

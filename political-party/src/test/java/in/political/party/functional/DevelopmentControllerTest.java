@@ -26,7 +26,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import in.political.party.controller.DevelopmentController;
 import in.political.party.dto.DevelopmentDto;
-import in.political.party.dto.LeaderDto;
 import in.political.party.service.DevelopmentService;
 import in.political.party.testutils.MasterData;
 
@@ -57,8 +56,10 @@ public class DevelopmentControllerTest {
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/politics/api/v1/development/add-development")
 				.content(MasterData.asJsonString(developmentDto)).contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
-
+System.out.println(MasterData.asJsonString(developmentDto));
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+		System.out.println("status "+result.getResponse().getStatus());
+		
 		testAssert(currentTest(),
 				(result.getResponse().getContentAsString().contentEquals(MasterData.asJsonString(savedDevelopmentDto))
 						? "true"
