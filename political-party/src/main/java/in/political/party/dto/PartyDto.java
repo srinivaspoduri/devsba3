@@ -56,6 +56,4 @@ public class PartyDto {
 		return "PoliticalPartyDto [politicalPartyId=" + politicalPartyId + ", partyName=" + partyName + ", founderName="
 				+ founderName + ", foundationYear=" + foundationYear + "]";
 	}
-
-
 }
