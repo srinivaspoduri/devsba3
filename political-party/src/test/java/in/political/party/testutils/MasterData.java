@@ -141,6 +141,15 @@ public static LeaderDevelopmentDto getDevelopmentLeaderDtoList() {
 
 	}
 
+public static LeaderDto getRegistredLeaderDto() {
+	LeaderDto LeaderDto = new LeaderDto();
+	LeaderDto.setPoliticalLeaderId(1L);
+	LeaderDto.setPoliticalPartyId(1L);
+	LeaderDto.setCandidateName("Leena");
+	LeaderDto.setCandidateState("Karnataka");
+	return LeaderDto;
+}
+
 
 	public static String asJsonString(final Object obj) {
 		try {

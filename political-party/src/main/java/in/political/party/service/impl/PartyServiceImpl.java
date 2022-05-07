@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import in.political.party.dto.PartyDto;
 import in.political.party.entity.Leader;
 import in.political.party.entity.Party;
+import in.political.party.exceptions.PartyNotFoundException;
 import in.political.party.repository.LeaderRepository;
 import in.political.party.repository.PartyRepository;
 import in.political.party.service.PartyService;
@@ -56,7 +57,7 @@ public class PartyServiceImpl implements PartyService {
 
 			return convertToDto(partyusingLeaderId.get(0).getPoliticalParty());
 		else
-			return null;
+			throw new PartyNotFoundException("Leader not registered to any Party....");
 	}
 
 	private PartyDto convertToDto(Party politicalparty) {

@@ -18,7 +18,7 @@ public class PartyDto {
 	@Temporal(TemporalType.DATE)
 	@JsonFormat(pattern="yyyy")
 	private Long foundationYear;
-
+	
 	public Long getPoliticalPartyId() {
 		return politicalPartyId;
 	}
@@ -51,9 +51,4 @@ public class PartyDto {
 		this.foundationYear = foundationYear;
 	}
 
-	@Override
-	public String toString() {
-		return "PoliticalPartyDto [politicalPartyId=" + politicalPartyId + ", partyName=" + partyName + ", founderName="
-				+ founderName + ", foundationYear=" + foundationYear + "]";
-	}
 }

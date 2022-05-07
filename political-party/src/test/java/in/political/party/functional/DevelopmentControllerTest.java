@@ -144,19 +144,16 @@ System.out.println(MasterData.asJsonString(developmentDto));
 	public void testUpdateDevelopment() throws Exception {
 		DevelopmentDto developmentDto = MasterData.getDevelopmentDto();
 		DevelopmentDto savedDevelopmentDto = MasterData.getDevelopmentDto();
-		new LeaderDto().setPoliticalLeaderId(1L);
-		developmentDto.setActivity("cleaning");
-		savedDevelopmentDto.setActivity("cleaning");
-		System.out.println(MasterData.asJsonString(developmentDto));
-		System.out.println(MasterData.asJsonString(savedDevelopmentDto));
+
+		savedDevelopmentDto.setPoliticalLeaderId(1L);
+
 		when(this.developmentService.updateDevelopment(developmentDto)).thenReturn(savedDevelopmentDto);
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.put("/politics/api/v1/development/update-development")
 				.content(MasterData.asJsonString(developmentDto)).contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
-		System.out.println();
+
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-		System.out.println("Response" + result.getResponse().getContentAsString());
-		System.out.println("response"+result.getResponse().getStatus());
+		System.out.println(result.getResponse().getContentAsString());
 		testAssert(currentTest(),
 				(result.getResponse().getContentAsString().contentEquals(MasterData.asJsonString(savedDevelopmentDto))
 						? "true"

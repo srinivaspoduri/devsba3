@@ -19,7 +19,7 @@ public class Leader {
 	@NotNull
 	private String candidateState;
 	
-	@OneToMany(mappedBy="politicalLeader")
+	@OneToMany(mappedBy="politicalLeader", orphanRemoval = true)
 	private List<Development> development;
 	
 	@NotNull
@@ -58,13 +58,5 @@ public class Leader {
 	public void setDevelopment(List<Development> development) {
 		this.development = development;
 	}
-	@Override
-	public String toString() {
-		return "PoliticalLeader [politicalLeaderId=" + politicalLeaderId + ", candidateName=" + candidateName
-				+ ", candidateState=" + candidateState + ", development=" + development + ", politicalParty="
-				+ politicalParty + "]";
-	}
 
-	
-	
 }

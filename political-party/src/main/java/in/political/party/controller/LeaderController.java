@@ -23,7 +23,6 @@ public class LeaderController {
 	@Autowired
 	private LeaderService leaderService;
 
-
 	@PostMapping("/leader/register-leader")
 	public ResponseEntity<LeaderDto> addPoliticalLeader(@Valid @RequestBody LeaderDto politicalLeaderDto, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
@@ -32,6 +31,7 @@ public class LeaderController {
 			throw new InvalidDataException("Invalid data Recived to register new Leader");
 		}
 		LeaderDto registerPoliticalLeader = leaderService.registerPoliticalLeader(politicalLeaderDto);
+		System.out.println(registerPoliticalLeader);
 		if(registerPoliticalLeader!=null)
 
 			return ResponseEntity.ok(registerPoliticalLeader);

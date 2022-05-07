@@ -70,14 +70,14 @@ public class PoliticalPartyExceptionTest {
 		
 
 		when(this.partyService.deleteLeader(2L))
-				.thenThrow(new PartyNotFoundException("Party not present to delete the leader 2"));
+				.thenThrow(new PartyNotFoundException("Party not present to delete  2"));
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/politics/api/v1/party/delete/2")
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
 
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 		System.out.println("***********************"+result.getResponse().getContentAsString());
 		testAssert(currentTest(),
-				(result.getResponse().getContentAsString().contains("Party not present to delete the leader 2") ? "true" : "false"),
+				(result.getResponse().getContentAsString().contains("Party not present to delete  2") ? "true" : "false"),
 				exceptionTestFile);
 
 	}

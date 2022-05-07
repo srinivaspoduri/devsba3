@@ -51,11 +51,11 @@ public class PartyController {
 			}
 			else
 			{
-				throw new LeaderIdNotFoundException(" leader Code Does not Exists.." + leaderId);
+				throw new LeaderIdNotFoundException(" Error while deleting the leader.." + leaderId);
 			}
 		}
 		else
-			throw new PartyNotFoundException("Party not present to delete the leader "+leaderId);
+			throw new PartyNotFoundException("Party not present to delete  "+leaderId);
 
 	}
 

@@ -63,10 +63,4 @@ public class Party {
 		this.founderName = founderName;
 	}
 
-	@Override
-	public String toString() {
-		return "PoliticalParty [politicalPartyId=" + politicalPartyId + ", partyName=" + partyName + ", founderName="
-				+ founderName + ", foundationYear=" + foundationYear + ", politicalLeader=" + politicalLeader + "]";
-	}
-
 }

@@ -69,4 +69,16 @@ public class GlobalExceptionHandler {
 
 		return ResponseEntity.badRequest().body(error);
 	}
+	
+	@ExceptionHandler(value=DataExistsException.class)
+	public ResponseEntity<ApiError> handleDevelopmentNotFoundException(DataExistsException dataExistsException)
+	{
+		String expmsg = dataExistsException.getMessage();
+		String expcode = "400";
+		ApiError error = new ApiError();
+		error.setCode(expcode);
+		error.setMsg(expmsg);
+
+		return ResponseEntity.badRequest().body(error);
+	}
 }

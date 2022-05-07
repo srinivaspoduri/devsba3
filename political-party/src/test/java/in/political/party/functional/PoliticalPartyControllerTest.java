@@ -105,8 +105,9 @@ public class PoliticalPartyControllerTest {
 	public void testDeletePoliticalLeader() throws Exception {
 	LeaderDto politicalLeaderDto = MasterData.getLeaderDto();
 		politicalLeaderDto.setPoliticalLeaderId(1L);
-
+		politicalLeaderDto.setPoliticalPartyId(1L);
 		when(this.partyService.deleteLeader(1L)).thenReturn(true);
+		
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/politics/api/v1/party/delete/1")
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);

@@ -106,11 +106,5 @@ public class Development {
 		this.politicalLeader = politicalLeader;
 	}
 
-	@Override
-	public String toString() {
-		return "Development [developmentId=" + developmentId + ", title=" + title + ", activity=" + activity
-				+ ", budget=" + budget + ", state=" + state + ", activityMonth=" + activityMonth + ", activityYear="
-				+ activityYear + ", politicalLeader=" + politicalLeader + "]";
-	}
-
+	
 }

@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ import in.political.party.dto.LeaderDto;
 import in.political.party.entity.Development;
 import in.political.party.entity.Leader;
 import in.political.party.entity.Party;
+import in.political.party.exceptions.LeaderIdNotFoundException;
 import in.political.party.repository.DevelopmentRepository;
 import in.political.party.repository.LeaderRepository;
 import in.political.party.service.DevelopmentService;
@@ -39,9 +41,16 @@ public class DevelopmentServiceImpl implements DevelopmentService {
 	@Transactional
 	public DevelopmentDto createDevelopment(DevelopmentDto developmentDto) {
 		Development development = convertToEntity(developmentDto);
+		Optional<Leader> findById = leaderRepository.findById(development.getPoliticalLeader().getPoliticalLeaderId());
+		if(findById.isPresent())
+		{
 		Development createdDevelopment = developmentRepository.save(development);
 		createdDevelopment.setDevelopmentId(developmentDto.getDevelopmentId());
 		return convertToDto(createdDevelopment);
+		}
+		else
+			throw new LeaderIdNotFoundException("Leader not present");
+		
 	}
 
 	@Override
@@ -58,7 +67,7 @@ public class DevelopmentServiceImpl implements DevelopmentService {
 	@Override
 	public List<DevelopmentDto> getAllDevelopmentsByLeaderId(Long politicalLeaderId) {
 
-		List<Development> developments = developmentRepository.findByPoliticalLeaderId(politicalLeaderId);
+		List<Development> developments = developmentRepository.findByPoliticalLeaderId(politicalLeaderId, null);
 
 		List<DevelopmentDto> developmentDtos = new ArrayList<>();
 		for (Development development : developments) {
@@ -67,10 +76,9 @@ public class DevelopmentServiceImpl implements DevelopmentService {
 		return developmentDtos;
 	}
 
-
 	public LeaderDevelopmentDto getDevByLeader(Long politicalLeaderId)
 	{
-		List<Development> developments = developmentRepository.findByPoliticalLeaderId(politicalLeaderId);
+		List<Development> developments = developmentRepository.findByPoliticalLeaderId(politicalLeaderId,Sort.by(Sort.Direction.DESC,"activityYear"));
 
 		List<DevelopmentDto> developmentDtos = new ArrayList<>();
 		for (Development development : developments) {

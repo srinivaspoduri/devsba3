@@ -95,11 +95,4 @@ public class DevelopmentDto {
 		this.activityYear = activityYear;
 	}
 
-	@Override
-	public String toString() {
-		return "DevelopmentDto [developmentId=" + developmentId + ", politicalLeaderId=" + politicalLeaderId
-				+ ", title=" + title + ", activity=" + activity + ", budget=" + budget + ", state=" + state
-				+ ", activityMonth=" + activityMonth + ", activityYear=" + activityYear + "]";
-	}
-
 }
