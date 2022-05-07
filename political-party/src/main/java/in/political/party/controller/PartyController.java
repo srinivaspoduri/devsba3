@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import in.political.party.dto.PartyDto;
 import in.political.party.exceptions.InvalidDataException;
 import in.political.party.exceptions.LeaderIdNotFoundException;
-import in.political.party.exceptions.PartyNotFoundException;
 import in.political.party.service.PartyService;
 
 import javax.validation.Valid;
@@ -41,9 +40,6 @@ public class PartyController {
 	@DeleteMapping("/delete/{leaderId}")
 	public ResponseEntity<String> deletePartyLeader(@PathVariable("leaderId")  Long leaderId) {
 
-		PartyDto leaderPartyDetails = partyService.getLeaderPartyDetails(leaderId);
-		if(leaderPartyDetails!=null)
-		{
 			boolean deleteLeader = partyService.deleteLeader(leaderId);
 			if(deleteLeader)
 			{
@@ -51,11 +47,9 @@ public class PartyController {
 			}
 			else
 			{
-				throw new LeaderIdNotFoundException(" Error while deleting the leader.." + leaderId);
+				throw new LeaderIdNotFoundException("Error while deleting the leader.." + leaderId);
 			}
-		}
-		else
-			throw new PartyNotFoundException("Party not present to delete  "+leaderId);
+		
 
 	}
 

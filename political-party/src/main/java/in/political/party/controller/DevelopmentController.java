@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import in.political.party.dto.DevelopmentDto;
 import in.political.party.dto.LeaderDevelopmentDto;
-import in.political.party.exceptions.DevelopmentNotFoundException;
 import in.political.party.exceptions.InvalidDataException;
-import in.political.party.exceptions.LeaderIdNotFoundException;
 import in.political.party.service.DevelopmentService;
 
 
@@ -46,14 +44,8 @@ public class DevelopmentController {
 			throw new InvalidDataException("Invalid data Recived to update the development");
 		}
 		DevelopmentDto updateDevelopment = developmentService.updateDevelopment(developmentDto);
-		if(updateDevelopment!=null)
-		{
-			return ResponseEntity.ok(updateDevelopment);
-		}
-		else
-		{
-			throw new DevelopmentNotFoundException("No Developments found /Leader not present");
-		}
+		return ResponseEntity.ok(updateDevelopment);
+				
 
 	}
 
@@ -61,19 +53,9 @@ public class DevelopmentController {
 	public ResponseEntity<LeaderDevelopmentDto> getAllDevByLeader(@PathVariable Long leaderId) {
 
 		LeaderDevelopmentDto devByLeader = developmentService.getDevByLeader(leaderId);
-		if(devByLeader.getLeader().getPoliticalLeaderId()==null)
-		{
-			throw new LeaderIdNotFoundException("Leader not present to get development details");
-		}
-		if(!devByLeader.getDevelopmentDtos().isEmpty())
-		{
-			return ResponseEntity.ok(devByLeader);
-		}
-		else
-		{
-			throw new DevelopmentNotFoundException("No Developments found /Leader not present");
-		}
-
+		return ResponseEntity.ok(devByLeader);
+		
+		
 
 	}
 

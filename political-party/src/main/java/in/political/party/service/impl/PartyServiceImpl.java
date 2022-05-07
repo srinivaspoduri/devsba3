@@ -36,16 +36,22 @@ public class PartyServiceImpl implements PartyService {
 
 	@Override
 	public boolean deleteLeader(Long leaderId) {
-
-		Optional<Leader> politicalLeader= politicalLeaderRepository.findById(leaderId);
-		if(politicalLeader.isPresent())
+		PartyDto leaderPartyDetails = getLeaderPartyDetails(leaderId);
+		if(leaderPartyDetails!=null)
 		{
-			politicalLeaderRepository.deleteById(leaderId);
-			return true;
-		}
-		else
+			Optional<Leader> politicalLeader= politicalLeaderRepository.findById(leaderId);
+			if(politicalLeader.isPresent())
+			{
+				politicalLeaderRepository.deleteById(leaderId);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}else
 		{
-			return false;
+			throw new PartyNotFoundException("Party not present to delete  "+leaderId);
 		}
 	}
 

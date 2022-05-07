@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import in.political.party.dto.LeaderDto;
 import in.political.party.exceptions.InvalidDataException;
-import in.political.party.exceptions.PartyNotFoundException;
 import in.political.party.service.LeaderService;
 
 
@@ -31,13 +30,7 @@ public class LeaderController {
 			throw new InvalidDataException("Invalid data Recived to register new Leader");
 		}
 		LeaderDto registerPoliticalLeader = leaderService.registerPoliticalLeader(politicalLeaderDto);
-		System.out.println(registerPoliticalLeader);
-		if(registerPoliticalLeader!=null)
-
-			return ResponseEntity.ok(registerPoliticalLeader);
-
-		else
-			throw new PartyNotFoundException("Party with ID "+politicalLeaderDto.getPoliticalPartyId() +" not found to register the leader "+politicalLeaderDto.getPoliticalLeaderId());
-
+					return ResponseEntity.ok(registerPoliticalLeader);
+				
 	}
 }

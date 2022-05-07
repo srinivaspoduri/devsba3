@@ -116,7 +116,27 @@ public class PoliticalPartyControllerTest {
 		System.out.println(result.getResponse().getContentAsString());
 		testAssert(currentTest(),
 				(result.getResponse().getContentAsString()
-						.contentEquals(MasterData.asJsonString(true)) ? "true" : "false"),
+						.contentEquals("Leader Deleted Successfully") ? "true" : "false"),
+				businessTestFile);
+
+	}
+	
+	
+	@Test
+	public void testDeletePoliticalLeaderWhenDeleteFail() throws Exception {
+	LeaderDto politicalLeaderDto = MasterData.getLeaderDto();
+		politicalLeaderDto.setPoliticalLeaderId(1L);
+		politicalLeaderDto.setPoliticalPartyId(1L);
+		when(this.partyService.deleteLeader(1L)).thenReturn(false);
+		
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/politics/api/v1/party/delete/1")
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+		System.out.println(result.getResponse().getContentAsString());
+		testAssert(currentTest(),
+				(result.getResponse().getStatus()==400 ? "true" : "false"),
 				businessTestFile);
 
 	}

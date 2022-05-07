@@ -11,6 +11,7 @@ import in.political.party.dto.LeaderDto;
 import in.political.party.entity.Leader;
 import in.political.party.entity.Party;
 import in.political.party.exceptions.DataExistsException;
+import in.political.party.exceptions.PartyNotFoundException;
 import in.political.party.repository.LeaderRepository;
 import in.political.party.repository.PartyRepository;
 import in.political.party.service.LeaderService;
@@ -45,7 +46,7 @@ public class LeaderServiceImpl implements LeaderService {
 			return convertToDto(leader);
 		}
 		else
-			return null;
+			throw new PartyNotFoundException("Party with ID "+leaderDto.getPoliticalPartyId() +" not found to register the leader "+leaderDto.getPoliticalLeaderId());
 	}
 
 

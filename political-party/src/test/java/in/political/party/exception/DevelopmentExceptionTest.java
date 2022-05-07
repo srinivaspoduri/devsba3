@@ -23,6 +23,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import in.political.party.controller.DevelopmentController;
 import in.political.party.dto.DevelopmentDto;
+import in.political.party.exceptions.DevelopmentNotFoundException;
+import in.political.party.exceptions.LeaderIdNotFoundException;
 import in.political.party.service.DevelopmentService;
 import in.political.party.testutils.MasterData;
 
@@ -82,22 +84,42 @@ System.out.println("*********************"+result.getResponse().getStatus());
 
 	}
 
-//	@Test
-//	public void testDeleteDevelopmentNotFoundException() throws Exception {
-//		ExceptionResponse exResponse = new ExceptionResponse("Development with Id - 2 not Found!",
-//				System.currentTimeMillis(), HttpStatus.NOT_FOUND.value());
-//
-//		when(this.developmentService.deleteDevelopment(2L))
-//				.thenThrow(new PoliticalLeaderNotFoundException("Development with Id - 2 not Found!"));
-//		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/politics/api/v1/development/2")
-//				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
-//
-//		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-//		testAssert(currentTest(),
-//				(result.getResponse().getContentAsString().contains(exResponse.getMessage()) ? "true" : "false"),
-//				exceptionTestFile);
-//
-//	}
+	@Test
+	public void testLeaderNotFoundWhileGettingDevelopmentsWhenLeaderNotPresent() throws Exception {
+		
+		LeaderIdNotFoundException leaderIdNotFoundException = new LeaderIdNotFoundException("Leader not present to get development details");
+				when(this.developmentService.getDevByLeader(0L))
+				.thenThrow(new LeaderIdNotFoundException("Leader not present to get development details"));
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/politics/api/v1/development/0")
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
+
+		
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+		System.out.println(result.getResponse().getStatus());
+		testAssert(currentTest(),
+				(result.getResponse().getStatus()==404? "true" : "false"),
+				exceptionTestFile);
+
+	}
+	
+	
+	@Test
+	public void testNoDevelopmentsFoundWhileGettingDevelopmentsWhenNoDevelopmentsAssignedToLeader() throws Exception {
+		
+		DevelopmentNotFoundException developmentNotFoundException = new DevelopmentNotFoundException("No Developments found /Leader not present");
+				when(this.developmentService.getDevByLeader(0L))
+				.thenThrow(new DevelopmentNotFoundException("No Developments found /Leader not present"));
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/politics/api/v1/development/0")
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
+
+		
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+		System.out.println(result.getResponse().getStatus());
+		testAssert(currentTest(),
+				(result.getResponse().getStatus()==404? "true" : "false"),
+				exceptionTestFile);
+
+	}
 //	@Test
 //	public void testGetDevelopmentByIdDevelopmentNotFoundException() throws Exception {
 //		ExceptionResponse exResponse = new ExceptionResponse("Development with Id - 2 not Found!",
