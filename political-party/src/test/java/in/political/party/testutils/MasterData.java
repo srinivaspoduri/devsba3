@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import in.political.party.dto.DevelopmentDto;
+import in.political.party.dto.LeaderDevelopmentDto;
 import in.political.party.dto.LeaderDto;
 import in.political.party.dto.PartyDto;
 
@@ -103,6 +104,43 @@ public class MasterData {
 		return developmentDtos;
 
 	}
+	
+public static LeaderDevelopmentDto getDevelopmentLeaderDtoList() {
+		
+		LeaderDevelopmentDto leaderDevelopmentDto = new LeaderDevelopmentDto();
+		List<DevelopmentDto> developmentDtos = new ArrayList<>();
+		DevelopmentDto developmentDto = new DevelopmentDto();
+		developmentDto.setDevelopmentId(1L);
+		developmentDto.setPoliticalLeaderId(1L);
+		developmentDto.setTitle("Smart City");
+		developmentDto.setBudget("250000000");
+		developmentDto.setActivity("Making Reads");
+		developmentDto.setActivityMonth(5);
+		developmentDto.setActivityYear(2022);
+		developmentDto.setState("karnataka");
+		developmentDtos.add(developmentDto);
+		developmentDto = new DevelopmentDto();
+		developmentDto.setDevelopmentId(2L);
+		developmentDto.setPoliticalLeaderId(2L);
+		developmentDto.setTitle("Health Camp");
+		developmentDto.setBudget("2500000");
+		developmentDto.setActivity("Organizing Health Camp");
+		developmentDto.setActivityMonth(9);
+		developmentDto.setActivityYear(2022);
+		developmentDto.setState("Bihar");
+		developmentDtos.add(developmentDto);
+		
+		LeaderDto LeaderDto = new LeaderDto();
+		LeaderDto.setPoliticalLeaderId(1L);
+		LeaderDto.setPoliticalPartyId(1L);
+		LeaderDto.setCandidateName("Leena");
+		LeaderDto.setCandidateState("Karnataka");
+		leaderDevelopmentDto.setDevelopmentDtos(developmentDtos);
+		leaderDevelopmentDto.setLeader(LeaderDto);
+		return leaderDevelopmentDto;
+
+	}
+
 
 	public static String asJsonString(final Object obj) {
 		try {

@@ -25,6 +25,7 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import in.political.party.controller.PartyController;
+import in.political.party.dto.LeaderDto;
 import in.political.party.dto.PartyDto;
 import in.political.party.service.PartyService;
 import in.political.party.testutils.MasterData;
@@ -96,6 +97,25 @@ public class PoliticalPartyControllerTest {
 				(result.getResponse().getStatus()==200
 						? "true"
 						: "false"),
+				businessTestFile);
+
+	}
+	
+	@Test
+	public void testDeletePoliticalLeader() throws Exception {
+	LeaderDto politicalLeaderDto = MasterData.getLeaderDto();
+		politicalLeaderDto.setPoliticalLeaderId(1L);
+
+		when(this.partyService.deleteLeader(1L)).thenReturn(true);
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/politics/api/v1/party/delete/1")
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON);
+
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+		System.out.println(result.getResponse().getContentAsString());
+		testAssert(currentTest(),
+				(result.getResponse().getContentAsString()
+						.contentEquals(MasterData.asJsonString(true)) ? "true" : "false"),
 				businessTestFile);
 
 	}
